@@ -8,10 +8,9 @@ function DateDrop(props) {
 
 
     return(
-    <select className="dateDrop" id="dateDrop">
+    <select className="dateDrop" id="dateDrop" onChange={props.cb(props.date)}>
         <option value={props.date}>{props.date}</option>
         {days.map((item)=>{
-
             for (let x=0;x<days.length;x++){
                 let showDate=newDate.getFullYear()+"-"+(newDate.getMonth()+1)+"-"+(newDate.getDate()-item)
                 return <option key={showDate} value={showDate}>{showDate}</option>
