@@ -1,7 +1,6 @@
 import React from "react";
 
 function HiRes(props) {
-    console.log(props.res);
     return(
         <button className="hiresToggle" onClick={()=>{
             props.cb(!props.res)
