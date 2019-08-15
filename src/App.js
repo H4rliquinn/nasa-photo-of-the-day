@@ -2,7 +2,11 @@ import React,{useState,useEffect,useRef} from "react";
 import axios from "axios";
 // import { OutputQuoteStyle } from "terser";
 
-import "./App.css";
+import './App.scss';
+import { Button } from "semantic-ui-react";
+import 'semantic-ui-css/semantic.min.css';
+import styled from 'styled-components';
+
 import ImageCard from "./ImageCard.js"
 import HiRes from "./HiRes.js";
 import DateDrop from "./DateDrop.js";
@@ -49,11 +53,7 @@ function App() {
       // setAPOD(data)
 //End Cached Data
 
-  }, [showDate]);
-
-  useEffect(() => {
-    console.log("APOD",APOD);
-  });
+  }, []);
 
   const {date,explanation,hdurl,title,url} = APOD;
   let src=(hiRes)?hdurl:url;
