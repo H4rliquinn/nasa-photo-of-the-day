@@ -56,5 +56,15 @@ h1,h2,p {
   background-color:rgba(150,150,150,.5);
   border-radius: 20px;
 }
+.ui.dropdown{
+  .menu .item .text{
+    font-size:1.5rem;
+    color:black;
+  }
+  .default{
+    font-size:1.5rem;
+  }
+} 
+
 
 // @include bdr;
