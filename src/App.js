@@ -3,8 +3,8 @@ import axios from "axios";
 
 
 import './App.scss';
-import { Select } from "semantic-ui-react";
-// import 'semantic-ui-css/semantic.min.css';
+// import { Select } from "semantic-ui-react";
+import 'semantic-ui-css/semantic.min.css';
 // import styled from 'styled-components';
 
 import ImageCard from "./ImageCard.js"
@@ -17,17 +17,24 @@ import rocket2 from "./img/rocket2.jpg";
 function App() {
   const [APOD,setAPOD]=useState({});
   const [hiRes,setHiRes]=useState(false);
-  const [showDate,setShowDate]=useState();
+  // const [showDate,setShowDate]=useState();
   const errState=useRef("");
 
   useEffect(() => {
         // Date parameter gets different Day: date:"2012-03-14"
-        let dateParams="";
-      if (showDate){
-        dateParams={api_key:"V2Gk5u80cbVTbC5iuSaDMZipq1U0Kt48dqN3fd2z"};
-      }else{
-        dateParams={api_key:"V2Gk5u80cbVTbC5iuSaDMZipq1U0Kt48dqN3fd2z",date:showDate};
+      let dateParams="";
+      if (date==undefined){
+        let newDate=new Date();
+        var date=newDate.getFullYear()+"-"+(newDate.getMonth()+1)+"-"+newDate.getDate();
       }
+
+      // dateParams={"api_key":"V2Gk5u80cbVTbC5iuSaDMZipq1U0Kt48dqN3fd2z"};
+      // console.log(dateParams,date);
+      // else{
+        dateParams={"api_key":"V2Gk5u80cbVTbC5iuSaDMZipq1U0Kt48dqN3fd2z","date":date};
+        console.log(dateParams);
+      // }
+
 //Axios Data
       // axios
       // .get('https://api.nasa.gov/planetary/apod', {
@@ -43,6 +50,7 @@ function App() {
       //   errState.current=err;
       // });
 // End Axios Data
+
 // Cached Data
       const data = {
         date: "2019-08-14",
@@ -65,18 +73,18 @@ function App() {
 
 
     <div className="App">
-        <header>
+        <div className="header">
           <img src={rocket} className="rocket" alt="Rocket ship-Left side"/>
           <h1>NASA's<br/>Photo of the Day<br/>explorer!</h1>
           <img src={rocket2} className="rocket2" alt="Rocket ship-Right side"/>
-        </header>
+        </div>
         <div className="content">
           <section className="control">
-            <DateDrop date={showDate} cb={setShowDate}/>
+            <DateDrop cb={setAPOD}/>
             <HiRes res={hiRes} cb={setHiRes} />
           </section>
           <section className="card">
-            <ImageCard date={showDate} explanation={explanation} src={src} title={title} err={errState.current}/>
+            <ImageCard date={date} explanation={explanation} src={src} title={title} err={errState.current}/>
           </section>
         </div>
     </div>
