@@ -8,5 +8,4 @@ function HiRes(props) {
     )
 }
 
-
 export default HiRes;

@@ -1,6 +1,6 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,useRef} from "react";
 import axios from "axios";
-import { OutputQuoteStyle } from "terser";
+// import { OutputQuoteStyle } from "terser";
 
 import "./App.css";
 import ImageCard from "./ImageCard.js"
@@ -11,6 +11,7 @@ function App() {
   const [APOD,setAPOD]=useState({});
   const [hiRes,setHiRes]=useState(false);
   const [showDate,setShowDate]=useState();
+  const errState=useRef("");
 
   useEffect(() => {
         // Date parameter gets different Day: date:"2012-03-14"
@@ -28,9 +29,11 @@ function App() {
       .then(res => {
         console.log(res.data);
         setAPOD(res.data)
+        setShowDate(res.data.date);
       })
       .catch((err)=>{
         console.log("AAAAHHHH!!!!",err);
+        errState.current=err;
       });
 // End Axios Data
 // Cached Data
@@ -46,9 +49,11 @@ function App() {
       // setAPOD(data)
 //End Cached Data
 
-  }, [DateDrop]);
+  }, [showDate]);
 
-
+  useEffect(() => {
+    console.log("APOD",APOD);
+  });
 
   const {date,explanation,hdurl,title,url} = APOD;
   let src=(hiRes)?hdurl:url;
@@ -60,11 +65,11 @@ function App() {
           <header>
             <img src="#" alt="Rocket ship"></img>
             <h1>Nasa's Photo of the Day explorer!</h1>
-            <DateDrop date={APOD.date} cb={setShowDate}/>
+            <DateDrop date={showDate} cb={setShowDate}/>
             <HiRes res={hiRes} cb={setHiRes} />
           </header>
           <section className="content">
-          <ImageCard date={date} explanation={explanation} src={src} title={title} />
+          <ImageCard date={showDate} explanation={explanation} src={src} title={title} err={errState.current}/>
 
           </section>
       </div>

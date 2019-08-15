@@ -3,12 +3,9 @@ import React from "react";
 function DateDrop(props) {
     let newDate=new Date();
     const days=[1,2,3,4,5]
-    // let showDate=`${newDate.getFullYear()}-${newDate.getMonth()+1}-${newDate.getDate()}`
-    // console.log(showDate);
-
-
+    console.log("Props",props);
     return(
-    <select className="dateDrop" id="dateDrop" onChange={props.cb(props.date)}>
+    <select className="dateDrop" id="dateDrop" onChange={(e)=>{props.cb(e.target.value)}}>
         <option value={props.date}>{props.date}</option>
         {days.map((item)=>{
             for (let x=0;x<days.length;x++){
@@ -20,7 +17,5 @@ function DateDrop(props) {
     </select>
     )
 }
-
-// option value={newDate.getFullYear()-newDate.getMonth()+1-newDate.getDate()-i>newDate.getFullYear()-newDate.getMonth()+1-newDate.getDate()-i</option>
 
 export default DateDrop;
