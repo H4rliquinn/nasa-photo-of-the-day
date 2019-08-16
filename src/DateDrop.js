@@ -16,7 +16,7 @@ const dateOptions=dot();
 // console.log(dateOptions);
 
 const DateDrop=(props)=>(
-    <Select placeholder={newDate.getFullYear()+"-"+(newDate.getMonth()+1)+"-"+newDate.getDate()} className="dateDrop" id="dateDrop" onChange={(e)=>{props.cb(e.target.value)}} options={dateOptions} />
+    <Select placeholder={newDate.getFullYear()+"-"+(newDate.getMonth()+1)+"-"+newDate.getDate()} className="dateDrop" id="dateDrop" onChange={(e,data)=>{props.cb(data.value)}} options={dateOptions} />
 )
 export default DateDrop;
 
